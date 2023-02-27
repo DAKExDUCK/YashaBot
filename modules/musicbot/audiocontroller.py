@@ -2,7 +2,6 @@ import asyncio
 from enum import Enum
 from itertools import islice
 from inspect import isawaitable
-from pprint import pprint
 from typing import TYPE_CHECKING, Coroutine, Optional, List, Tuple
 
 import discord
@@ -388,7 +387,9 @@ class AudioController(object):
 
         elif host == linkutils.Sites.Yandex:
             y_data = await YandexMusicClient.get_track(track)
-            title = y_data['title'] + " - " + " ".join( [artist['name'] for artist in y_data['artists']] )
+            title = y_data['title'] + \
+                    " - " + \
+                    " ".join( [artist['name'] for artist in y_data['artists']] )
             
             data = await self.search_youtube(title)
 
@@ -405,7 +406,7 @@ class AudioController(object):
 
         self.playlist.add(song)
         if self.current_song is None:
-            print("Playing {}".format(track))
+            print("Playing: {} / {}".format(title, track))
             await self.play_song(song)
         return song
 
