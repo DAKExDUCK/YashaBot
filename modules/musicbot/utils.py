@@ -11,7 +11,7 @@ try:
     from discord import opus, utils, Guild, Message, VoiceChannel, Emoji
     from emoji import is_emoji
 except ImportError:
-    if not os.getenv("DANDELION_INSTALLING"):
+    if not os.getenv("YASHA_INSTALLING"):
         raise
 
 from config import config
