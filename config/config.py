@@ -3,11 +3,12 @@
 import os
 import json
 
-from musicbot.utils import get_env_var, alchemize_url
+from modules.musicbot.utils import get_env_var, alchemize_url
 
 
 DEFAULTS = {
     "BOT_TOKEN": "YOUR_TOKEN_GOES_HERE",
+    "Y_TOKEN": "YOUR_TOKEN_GOES_HERE",
     "SPOTIFY_ID": "",
     "SPOTIFY_SECRET": "",
 
@@ -32,7 +33,7 @@ DEFAULTS = {
 if os.path.isfile("config.json"):
     with open("config.json") as f:
         DEFAULTS.update(json.load(f))
-elif not os.getenv("DANDELION_INSTALLING"):
+elif not os.getenv("YASHA_INSTALLING"):
     with open("config.json", "w") as f:
         json.dump(DEFAULTS, f, indent=2)
 

@@ -8,3 +8,4 @@ __pycache__
 /config.json
 /settings.db
 /log.txt
+/venv

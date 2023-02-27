@@ -16,7 +16,7 @@ sys.argv.extend(
             for file in glob.glob("musicbot/**/*.py", recursive=True)
         ],
         "--hidden-import=" + DATABASE_LIBRARY,
-        "-n=DandelionMusic",
+        "-n=YashaBOT",
         "-i=ui/note.ico",
         "run.py",
     ]
