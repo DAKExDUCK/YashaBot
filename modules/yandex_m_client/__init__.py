@@ -19,7 +19,25 @@ class YandexMusicClient:
 
         return (await YandexMusicClient.client.albums_with_tracks( res ))
 
-    async def get_playlist(url):
-        res = f"{url.split('/')[-3]}:{url.split('/')[-1]}"
-        
-        return (await YandexMusicClient.client.playlists_list( res ))[0]
+    async def get_tracks_ids_from_playlist(url:str) -> list[str]:
+        """
+        Args:
+            url (str): URL of user's Playlist
+
+        Returns:
+            list[str]: List of "album_id:track_id"
+        """
+        uid = url.split('/')[-3]
+        kind = url.split('/')[-1]
+
+        data = (await YandexMusicClient.client.users_playlists( kind=kind, user_id=uid )).tracks
+
+        tracks_ids = []
+
+        for track in data:
+            track = await track.fetch_track_async()
+            track_id = track.track_id
+            if ':' in track_id:
+                tracks_ids.append( track_id )
+
+        return tracks_ids
