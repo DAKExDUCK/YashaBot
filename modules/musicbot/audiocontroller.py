@@ -490,15 +490,16 @@ class AudioController(object):
 
 
             for album_track_ids in r:
-                t_id, a_id = album_track_ids.split(':')
-                link = 'https://music.yandex.ru/album/' + a_id + "/track/" + t_id
+                if ':' in album_track_ids:
+                    t_id, a_id = album_track_ids.split(':')
+                    link = 'https://music.yandex.ru/album/' + a_id + "/track/" + t_id
 
-                song = Song(
-                    linkutils.Origins.Playlist,
-                    linkutils.Sites.Yandex,
-                    webpage_url=link,
-                )
-                self.playlist.add(song)
+                    song = Song(
+                        linkutils.Origins.Playlist,
+                        linkutils.Sites.Yandex,
+                        webpage_url=link,
+                    )
+                    self.playlist.add(song)
 
         self.add_task(self.preload_queue())
 

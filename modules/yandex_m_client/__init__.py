@@ -1,3 +1,4 @@
+import asyncio
 from yandex_music import ClientAsync
 
 from config import config
@@ -27,17 +28,15 @@ class YandexMusicClient:
         Returns:
             list[str]: List of "album_id:track_id"
         """
+
+        async def get_track_data(track):
+            return (await track.fetch_track_async()).track_id
+
         uid = url.split('/')[-3]
         kind = url.split('/')[-1]
 
         data = (await YandexMusicClient.client.users_playlists( kind=kind, user_id=uid )).tracks
 
-        tracks_ids = []
-
-        for track in data:
-            track = await track.fetch_track_async()
-            track_id = track.track_id
-            if ':' in track_id:
-                tracks_ids.append( track_id )
-
+        tracks_ids = await asyncio.gather(*[get_track_data(track) for track in data ])
+            
         return tracks_ids
