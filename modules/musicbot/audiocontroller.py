@@ -358,7 +358,7 @@ class AudioController(object):
 
     async def process_song(self, track: str) -> Optional[Song]:
         """Adds the track to the playlist instance and plays it, if it is the first song"""
-
+        title = ''
         host = linkutils.identify_url(track)
         is_playlist = linkutils.identify_playlist(track)
 
