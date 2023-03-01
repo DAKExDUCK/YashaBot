@@ -2,6 +2,7 @@
 A Discord music bot written in Python with support for YandexMusic, Youtube and Spotify
 
 [ADD TO SERVER](https://discord.com/api/oauth2/authorize?client_id=1079289184868630530&permissions=3197952&scope=bot)
+> Bot was blocked
 __________________
 
 ### Yandex
